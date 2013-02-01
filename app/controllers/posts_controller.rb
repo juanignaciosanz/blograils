@@ -10,6 +10,8 @@ class PostsController < ApplicationController
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @posts }
+      #format.json { render json: @posts.to_json( :include => {:comments => {:methods => :comments_count}} ) }
+      format.xml { render xml: @posts }
     end
   end
 
