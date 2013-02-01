@@ -4,7 +4,9 @@ Blog::Application.routes.draw do
   
   get "home/index"
 
-  resources :posts
+  resources :posts do
+    resources :comments
+  end
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
