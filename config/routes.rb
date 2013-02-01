@@ -5,6 +5,8 @@ Blog::Application.routes.draw do
   get "home/index"
 
   resources :posts do
+    get 'recent', :on => :collection
+    get 'uncommented', :on => :collection
     resources :comments
   end
 

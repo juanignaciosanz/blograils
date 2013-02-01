@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
 
-  http_basic_authenticate_with :name => 'dhh', :password => 'secret', :except => [:index, :show]
+  http_basic_authenticate_with :name => 'dhh', :password => 'secret', :except => [:index, :show, :recent, :uncommented]
   
   # GET /posts
   # GET /posts.json
@@ -11,6 +11,28 @@ class PostsController < ApplicationController
       format.html # index.html.erb
       format.json { render json: @posts }
       #format.json { render json: @posts.to_json( :include => {:comments => {:methods => :comments_count}} ) }
+      format.xml { render xml: @posts }
+    end
+  end
+
+  # GET /posts/recent
+  # GET /posts/recent.json
+  def recent
+    @posts = Post.recent
+    respond_to do |format|
+      format.html { render :index }
+      format.json { render json: @posts }
+      format.xml { render xml: @posts }
+    end
+  end
+
+  # GET /posts/uncommented
+  # GET /posts/uncommented.json
+  def uncommented
+    @posts = Post.uncommented
+    respond_to do |format|
+      format.html { render :index }
+      format.json { render json: @posts }
       format.xml { render xml: @posts }
     end
   end

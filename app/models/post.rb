@@ -9,4 +9,7 @@ class Post < ActiveRecord::Base
 
 	accepts_nested_attributes_for :tags, :allow_destroy => :true,
 		:reject_if => proc {|attrs| attrs.all? { |k, v| v.blank? } }
-end
+
+  	scope :recent, limit(2).order('posts.created_at DESC')
+  	scope :uncommented, where(:comments_count => 0).limit(10)
+  end

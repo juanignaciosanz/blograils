@@ -1,2 +1,41 @@
 <h1>Hello, rails</h1>
 <%= link_to "My Blog", posts_path %>
+
+<h2>Recent posts</h2>
+
+<table>
+  <tr>
+    <th>Title</th><th>Content</th><th></th><th></th>
+  </tr>
+
+<% @recent.each do |post| %>
+  <tr>
+    <td><%= post.title %></td>
+    <td><%= post.content %></td>
+    <td><%= post.comments_count %></td>
+    <td><%= link_to 'Show', post %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<h2>Uncommented posts</h2>
+
+<table>
+  <tr>
+    <th>Title</th><th>Content</th><th></th>
+  </tr>
+
+<% @uncommented.each do |post| %>
+  <tr>
+    <td><%= post.title %></td>
+    <td><%= post.content %></td>
+    <td><%= link_to 'Show', post %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Post', new_post_path %>
